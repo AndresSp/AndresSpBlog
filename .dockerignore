@@ -1,0 +1,7 @@
+.meteor/local
+node_modules
+dist
+redis.conf
+.vscode
+.idea
+/docker-secrets
