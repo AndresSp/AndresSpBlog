@@ -2,16 +2,17 @@ version: '3.7'
 services:
   meteor:
     build: .
-    image: andresspblog
+    image: meteor-base
     container_name: meteor-container
-    command: 'npm start'
     ports:
       - '3000:3000'
-    volumes:
-      - '.:/app'
+    # volumes:
+    #   - './app:/app'
     environment:
-      - MODE=DEV
+      - MODE=QA
+      - ROOT_URL=${APP_ROOT_URL:-http://localhost}
       - MONGO_URL=mongodb://admin:admin@mongo:27017
+      - PORT=3000
     depends_on:
       - 'mongo'
       - 'redis'
@@ -21,6 +22,8 @@ services:
     image: mongo
     container_name: mongo-container
     restart: always
+    command:
+      - --storageEngine=wiredTiger
     environment:
       MONGO_INITDB_ROOT_USERNAME: admin
       MONGO_INITDB_ROOT_PASSWORD: admin
