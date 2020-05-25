@@ -4,6 +4,10 @@
   "version": "1.0.0",
   "description": "My Portfolio and Tech Blog",
   "scripts": {
+    "start": "npm --prefix app/ run start",
+    "test": "npm --prefix app/ run test",
+    "test-app": "npm --prefix app/ run test-app",
+    "visualize": "npm --prefix app/ run visualize",
     "docker:up:dev": "docker-compose -f docker-compose.dev.yml up",
     "docker:up:qa": "docker-compose -f docker-compose.staging.yml up",
     "docker:up:prod": "docker-compose -f docker-compose.prod.yml up",
