@@ -1,12 +1,22 @@
 // Fill the DB with example data on startup
 
 import { Meteor } from 'meteor/meteor';
+import { Accounts } from 'meteor/accounts-base'
 import { Roles } from '../../api/roles/roles.js';
 
 
 Meteor.startup(() => {
+  const today = new Date();
+
+  if(Meteor.users.find().count() === 0){
+    Accounts.createUser({
+      username: 'AndresSp',
+      email: 'andrestunonsp@gmail.com',
+      password: 'admin'
+    })
+  }
+
   if(Roles.find().count() === 0){
-    const today = new Date();
 
     const roles = [
       {
@@ -50,13 +60,15 @@ Meteor.startup(() => {
     ]
 
     const rolesSumed = roles.map((_,i) => {
-        roles.slice(0,i+1).reduce((total, current) => ({
-        ...current,
-        permissions: [...total.permissions, ...current.permissions]
-      }), {permissions: []})
-    })
+      return (
+          roles.slice(0,i+1).reduce((total, current) => ({
+          ...current,
+          permissions: [...total.permissions, ...current.permissions]
+          }), {permissions: []})
+        )
+      })
 
-    rolesSumed.forEach(role => Roles.insert({
+      rolesSumed.forEach(role => Roles.insert({
       ...role,
       ...{ 
         createdAt: today,
