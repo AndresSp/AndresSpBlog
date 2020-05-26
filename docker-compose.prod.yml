@@ -1,0 +1,15 @@
+## TODO
+version: '3.7'
+services:
+  meteor:
+    build: .
+    image: meteor-base
+    container_name: meteor-container
+    ports:
+      - '3000:3000'
+    # volumes:
+    #   - './app:/app'
+    environment:
+      - MODE=PROD
+      - ROOT_URL=${APP_ROOT_URL:-http://localhost}
+      - PORT=3000
