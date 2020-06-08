@@ -2,7 +2,9 @@
 version: '3.7'
 services:
   meteor:
-    build: .
+    build: 
+      context: ./
+      dockerfile: 'deploy.dockerfile'
     image: meteor-base
     container_name: meteor-container
     ports:
@@ -10,6 +12,6 @@ services:
     # volumes:
     #   - './app:/app'
     environment:
-      - MODE=PROD
+      - NODE_ENV=production
       - ROOT_URL=${APP_ROOT_URL:-http://localhost}
       - PORT=3000

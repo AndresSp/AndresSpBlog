@@ -4,28 +4,37 @@
   "version": "1.0.0",
   "description": "My Portfolio and Tech Blog",
   "scripts": {
-    "start": "npm --prefix app/ run start",
-    "test": "npm --prefix app/ run test",
-    "docker:up:dev": "docker-compose -f docker-compose.dev.yml up",
-    "docker:up:qa": "docker-compose -f docker-compose.staging.yml up",
+    "start": "node app.js",
+    "lint": "eslint .",
+    "docker:up:dev": "docker-compose -f docker-compose.dev.yml up -d",
     "docker:up:prod": "docker-compose -f docker-compose.prod.yml up",
     "docker:build:dev": "docker-compose -f docker-compose.dev.yml up --build",
-    "docker:build:qa": "docker-compose -f docker-compose.staging.yml up --build",
     "docker:build:prod": "docker-compose -f docker-compose.prod.yml up --build",
-    "docker:down": "docker-compose down -v",
+    "docker:down:dev": "docker-compose -f docker-compose.dev.yml down -v",
+    "docker:down:prod": "docker-compose -f docker-compose.prod.yml down -v",
     "docker:start": "docker-compose start",
     "docker:stop": "docker-compose stop",
     "docker:bash": "docker exec -it `docker ps | grep node | awk '{print $1}'` bash || true",
     "docker:prune:images": "docker rmi $(docker images --filter \"dangling=true\" -q --no-trunc) || echo \"Doesn't has images!\"",
     "docker:prune:volumes": "docker volume prune -f"
   },
+  "devDependencies": {
+    "eslint": "^6.8.0",
+    "eslint-config-airbnb-base": "^14.1.0",
+    "eslint-plugin-import": "^2.21.1"
+  },
+  "dependencies": {
+    "bunyan": "^1.8.12",
+    "restify": "^6.3.4",
+    "restify-router": "^0.5.0"
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/AndresSp/AndresSpBlog.git"
-  },"keywords": [
-    "meteor",
-    "node",
-    "react"
+  },
+  "keywords": [
+    "restify",
+    "node"
   ],
   "author": "AndresSp",
   "license": "MIT",

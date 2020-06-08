@@ -1,15 +1,18 @@
 version: '3.7'
 services:
-  meteor:
-    build: .
-    image: meteor-base
-    container_name: meteor-container
+  api:
+    build: 
+      context: ./
+      dockerfile: 'dev.dockerfile'
+    image: node
+    container_name: andresspblog-api
     ports:
       - '3000:3000'
-    # volumes:
-    #   - './app:/app'
+      - '9229:9229'
+    volumes:
+      - './:/home/node/app'
     environment:
-      - MODE=DEV
+      - NODE_ENV=development
       - ROOT_URL=${APP_ROOT_URL:-http://localhost}
       - MONGO_URL=mongodb://admin:admin@mongo:27017
       - PORT=3000
@@ -17,18 +20,16 @@ services:
       - 'mongo'
       - 'redis'
     networks:
-      - main-net
+      - back-net
   mongo:
     image: mongo
     container_name: mongo-container
     restart: always
-    command:
-      - --storageEngine=wiredTiger
     environment:
       MONGO_INITDB_ROOT_USERNAME: admin
       MONGO_INITDB_ROOT_PASSWORD: admin
     networks:
-      - main-net
+      - back-net
   mongo-express:
     image: mongo-express
     container_name: mongo-dashboard-container
@@ -41,7 +42,7 @@ services:
     depends_on:
       - 'mongo'
     networks:
-      - main-net
+      - back-net
   redis:
     image: redis:5
     container_name: redis-container
@@ -51,7 +52,7 @@ services:
     expose:
       - '6379'
     networks:
-      - main-net
+      - back-net
 networks:
-  main-net:
-    name: main-net
+  back-net:
+    name: back-net
