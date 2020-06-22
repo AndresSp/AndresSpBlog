@@ -24,7 +24,7 @@ COPY --chown=node . .
 # Bind to all network interfaces so that it can be mapped to the host OS
 #ENV PORT=3000
 
-EXPOSE ${PORT}
+EXPOSE 5000
 EXPOSE 9229
 
 CMD [ "sleep", "infinity" ]

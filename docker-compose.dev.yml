@@ -7,15 +7,10 @@ services:
     image: node
     container_name: andresspblog-api
     ports:
-      - '3000:3000'
+      - '5000:5000'
       - '9229:9229'
     volumes:
       - './:/home/node/app'
-    environment:
-      - NODE_ENV=development
-      - ROOT_URL=${APP_ROOT_URL:-http://localhost}
-      - MONGO_URL=mongodb://admin:admin@mongo:27017
-      - PORT=3000
     depends_on:
       - 'mongo'
       - 'redis'

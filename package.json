@@ -1,10 +1,14 @@
 {
   "name": "andresspblog",
-  "private": true,
   "version": "1.0.0",
   "description": "My Portfolio and Tech Blog",
+  "main": "src/server.js",
+  "directories": {
+    "test": "tests"
+  },
   "scripts": {
-    "start": "node app.js",
+    "start": "node .",
+    "test": "echo \"Error: no test specified\" && exit 1",
     "lint": "eslint .",
     "docker:up:dev": "docker-compose -f docker-compose.dev.yml up -d",
     "docker:up:prod": "docker-compose -f docker-compose.prod.yml up",
@@ -18,28 +22,28 @@
     "docker:prune:images": "docker rmi $(docker images --filter \"dangling=true\" -q --no-trunc) || echo \"Doesn't has images!\"",
     "docker:prune:volumes": "docker volume prune -f"
   },
-  "devDependencies": {
-    "eslint": "^6.8.0",
-    "eslint-config-airbnb-base": "^14.1.0",
-    "eslint-plugin-import": "^2.21.1"
-  },
-  "dependencies": {
-    "bunyan": "^1.8.12",
-    "restify": "^6.3.4",
-    "restify-router": "^0.5.0"
-  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/AndresSp/AndresSpBlog.git"
   },
   "keywords": [
-    "restify",
-    "node"
+    "node",
+    "restify"
   ],
   "author": "AndresSp",
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/AndresSp/AndresSpBlog/issues"
   },
-  "homepage": "https://github.com/AndresSp/AndresSpBlog#readme"
+  "homepage": "https://github.com/AndresSp/AndresSpBlog#readme",
+  "dependencies": {
+    "dotenv": "^8.2.0",
+    "http-status": "^1.4.2",
+    "joi": "^14.3.1",
+    "mongoose": "^5.9.18",
+    "restify": "^8.5.1",
+    "restify-errors": "^8.0.2",
+    "restify-url-semver": "^1.1.1",
+    "winston": "^3.2.1"
+  }
 }
