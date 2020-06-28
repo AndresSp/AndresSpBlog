@@ -1,8 +1,10 @@
 
-# Created by https://www.toptal.com/developers/gitignore/api/node
-# Edit at https://www.toptal.com/developers/gitignore?templates=node
 
 ### Node ###
+
+#Volumes
+/mongo-volume
+
 # Logs
 logs
 *.log
@@ -87,5 +89,3 @@ typings/
 
 # DynamoDB Local files
 .dynamodb/
-
-# End of https://www.toptal.com/developers/gitignore/api/node
