@@ -6,7 +6,6 @@ const logger = serviceLocator.get('logger');
 module.exports = async (user, pass, host, port, name) => {
     const mongoose = serviceLocator.get('mongoose');
     try {
-        console.log(`mongodb://${user}:${pass}@${host}:${port}`)
         const connection = await mongoose.connect(`mongodb://${user}:${pass}@${host}:${port}`, {
         useNewUrlParser: true, 
         useUnifiedTopology: true,

@@ -3,7 +3,7 @@
 const serviceLocator = require('../lib/service_locator');
 const restify = require('restify');
 const versioning = require('restify-url-semver');
-const joi = require('joi');
+const joi = require('@hapi/joi');
 const validator = require('./../lib/validator');
 
 const logger = serviceLocator.get('logger');

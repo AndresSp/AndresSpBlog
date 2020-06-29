@@ -7,7 +7,7 @@
     "test": "tests"
   },
   "scripts": {
-    "start": "node .",
+    "start": "nodemon .",
     "test": "echo \"Error: no test specified\" && exit 1",
     "lint": "eslint .",
     "docker:up:dev": "docker-compose -f docker-compose.dev.yml up -d",
@@ -37,13 +37,16 @@
   },
   "homepage": "https://github.com/AndresSp/AndresSpBlog#readme",
   "dependencies": {
+    "@hapi/joi": "^17.1.1",
     "dotenv": "^8.2.0",
     "http-status": "^1.4.2",
-    "joi": "^14.3.1",
     "mongoose": "^5.9.18",
     "restify": "^8.5.1",
     "restify-errors": "^8.0.2",
     "restify-url-semver": "^1.1.1",
     "winston": "^3.2.1"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.4"
   }
 }
