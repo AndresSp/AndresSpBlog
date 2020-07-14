@@ -3,7 +3,7 @@
 const Schmervice = require( 'schmervice' );
 const Boom = require( '@hapi/boom' );
 
-class UsersService extends Schmervice.Service {
+class UserService extends Schmervice.Service {
   constructor( ...args ) {
     super( ...args );
   }
@@ -21,20 +21,19 @@ class UsersService extends Schmervice.Service {
     return await model.save().toJSON();
   }
 
-  async getUser( username ) {
-    const Users = db.model( 'Users' );
-    const user = await Users.findOne( { username } );
+  async get( entity, id ) {
+    const Model = db.model( entity );
+    const model = await Model.findOne( { username } );
 
-    if ( !user ) {
+    if ( !model ) {
       const err = new this.errs.NotFoundError(
         `User with username - ${username} does not exists`
       );
       return err;
     }
 
-    this.log.info( 'User fetched Successfully' );
     return user;
   }
 }
 
-module.exports = UsersService;
+module.exports = UserService;
