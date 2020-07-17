@@ -43,8 +43,12 @@ class UserController {
     static async delete( request, h ) {
         const { id } = request.params;
         const { commonService } = request.services( [ 'services-loader' ] );
-        await commonService.remove( 'User', id )
-        return h.response().code( 204 )
+        const result = await commonService.remove( 'User', id )
+        if ( result ) {
+            return h.response().code( 204 )
+        } else {
+            throw new Boom.notFound()
+        }
     }
 
 }

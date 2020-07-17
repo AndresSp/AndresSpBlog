@@ -1,21 +1,24 @@
 'use strict';
 const UserController = require( './user.controller' )
+const CommonSchemas = require( './../../shared/schemas/common-params.schema' )
 
 const pathName = 'user'
 module.exports = [
   {
     method: 'GET',
     path: `/${pathName}`,
-    handler: UserController.get,
-    // options: {
-    //   auth: false,
-    //   validate: {}
-    // }
+    handler: UserController.get
   },
   {
     method: 'GET',
     path: `/${pathName}/{id}`,
-    handler: UserController.getById
+    handler: UserController.getById,
+    options: {
+      auth: false,
+      validate: {
+        params: CommonSchemas.objectIdParam
+      }
+    }
   },
   {
     method: 'POST',
@@ -25,11 +28,23 @@ module.exports = [
   {
     method: 'PATCH',
     path: `/${pathName}/{id}`,
-    handler: UserController.patchById
+    handler: UserController.patchById,
+    options: {
+      auth: false,
+      validate: {
+        params: CommonSchemas.objectIdParam
+      }
+    }
   },
   {
     method: 'DELETE',
     path: `/${pathName}/{id}`,
-    handler: UserController.delete
+    handler: UserController.delete,
+    options: {
+      auth: false,
+      validate: {
+        params: CommonSchemas.objectIdParam
+      }
+    }
   }
 ]

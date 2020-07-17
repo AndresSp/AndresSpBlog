@@ -17,22 +17,22 @@ class UserService extends Schmervice.Service {
     //   throw new Boom.conflict( 'User with username already exists' )
     // }
 
-    const model = new Model( body );
-    return await model.save().toJSON();
+    // const model = new Model( body );
+    // return await model.save().toJSON();
   }
 
   async get( entity, id ) {
-    const Model = db.model( entity );
-    const model = await Model.findOne( { username } );
+    // const Model = db.model( entity );
+    // const model = await Model.findOne( { username } );
 
-    if ( !model ) {
-      const err = new this.errs.NotFoundError(
-        `User with username - ${username} does not exists`
-      );
-      return err;
-    }
+    // if ( !model ) {
+    //   const err = new this.errs.NotFoundError(
+    //     `User with username - ${username} does not exists`
+    //   );
+    //   return err;
+    // }
 
-    return user;
+    // return user;
   }
 }
 

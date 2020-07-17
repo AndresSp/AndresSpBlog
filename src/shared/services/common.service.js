@@ -1,6 +1,7 @@
 'use strict';
 
 const Schmervice = require( 'schmervice' );
+const mongoose = require( 'mongoose' );
 const Boom = require( '@hapi/boom' );
 
 class CommonService extends Schmervice.Service {
@@ -11,8 +12,8 @@ class CommonService extends Schmervice.Service {
     async list( entity ) {
         try {
             const Model = this.server.db.model( entity );
-            const models = await Model.find( {} );
-            return models.lean()
+            const docs = await Model.find( {} );
+            return docs.map( doc => doc.toObject() )
         } catch ( err ) {
             this.errorHandler( err )
         }
@@ -20,9 +21,10 @@ class CommonService extends Schmervice.Service {
 
     async get( entity, id ) {
         try {
+            this.checkId( id );
             const Model = this.server.db.model( entity );
-            const model = await Model.findById( id );
-            return model.lean()
+            const doc = await Model.findById( id );
+            return doc ? doc.toObject() : null
         } catch ( err ) {
             this.errorHandler( err )
         }
@@ -31,8 +33,9 @@ class CommonService extends Schmervice.Service {
     async create( entity, body ) {
         try {
             const Model = this.server.db.model( entity );
-            const model = Model.create( body ).lean();
-            return model.lean()
+            const model = new Model( body );
+            const doc = await model.save()
+            return doc.toObject()
         } catch ( err ) {
             this.errorHandler( err )
         }
@@ -40,9 +43,10 @@ class CommonService extends Schmervice.Service {
 
     async update( entity, id, body ) {
         try {
+            this.checkId( id );
             const Model = this.server.db.model( entity );
-            const model = new Model.findByIdAndUpdate( id, body );
-            return model.lean()
+            const doc = new Model.findByIdAndUpdate( id, body );
+            return doc.toObject()
         } catch ( err ) {
             this.errorHandler( err )
         }
@@ -50,10 +54,18 @@ class CommonService extends Schmervice.Service {
 
     async remove( entity, id ) {
         try {
+            this.checkId( id );
             const Model = this.server.db.model( entity );
-            await Model.findByIdAndDelete( id );
+            const doc = await Model.findByIdAndDelete( id );
+            return doc ? doc.toObject() : null
         } catch ( err ) {
             this.errorHandler( err )
+        }
+    }
+
+    checkId( id ) {
+        if ( !mongoose.isValidObjectId( id ) ) {
+            throw 'not a valid database id'
         }
     }
 
