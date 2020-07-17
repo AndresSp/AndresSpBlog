@@ -9,7 +9,7 @@ class UserController {
         const { commonService } = request.services( [ 'services-loader' ] );
         const result = await commonService.list( 'User' )
         const response = result.map( ( r ) => h.filterMObj( r ) )
-        return h.response( response ).code( 200 )
+        return h.response( { results: response, totalCount: response.length } ).code( 200 )
     }
 
     static async getById( request, h ) {

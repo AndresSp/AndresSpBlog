@@ -7,7 +7,18 @@ module.exports = [
   {
     method: 'GET',
     path: `/${pathName}`,
-    handler: UserController.get
+    handler: UserController.get,
+    options: {
+      auth: false,
+      validate: {
+        query: CommonSchemas.pagination
+      },
+      plugins: {
+        pagination: {
+          enabled: true
+        }
+      }
+    }
   },
   {
     method: 'GET',
@@ -16,7 +27,7 @@ module.exports = [
     options: {
       auth: false,
       validate: {
-        params: CommonSchemas.objectIdParam
+        params: CommonSchemas.objectId
       }
     }
   },
@@ -32,7 +43,7 @@ module.exports = [
     options: {
       auth: false,
       validate: {
-        params: CommonSchemas.objectIdParam
+        params: CommonSchemas.objectId
       }
     }
   },
@@ -43,7 +54,7 @@ module.exports = [
     options: {
       auth: false,
       validate: {
-        params: CommonSchemas.objectIdParam
+        params: CommonSchemas.objectId
       }
     }
   }

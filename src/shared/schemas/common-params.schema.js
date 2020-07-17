@@ -7,6 +7,13 @@ const objectIdParam = Joi.object( {
     id: Joi.objectId()
 } );
 
+const paginationQueryParam = Joi.object( {
+    limit: Joi.number().integer(),
+    page: Joi.number().integer(),
+    pagination: Joi.boolean()
+} );
+
 module.exports = {
-    objectIdParam: objectIdParam
+    objectId: objectIdParam,
+    pagination: paginationQueryParam
 }
