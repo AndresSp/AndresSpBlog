@@ -45,7 +45,7 @@
     "hapi-mongoose": "^2.0.0",
     "hapi-pagination": "^4.0.0",
     "joi-objectid": "^3.0.1",
-    "mongoose": "^5.9.18",
+    "mongoose": "^5.13.15",
     "schmervice": "^1.5.0"
   },
   "devDependencies": {
